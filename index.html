@@ -25,6 +25,10 @@
                     backgroundImage: {
                         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
                         'gradient-radial-dark': 'radial-gradient(var(--tw-gradient-stops))',
+                    },
+                    screens: {
+                        'xs': '480px',
+                        '3xl': '1920px',
                     }
                 }
             }
@@ -55,12 +59,14 @@
             font-family: "Inter", sans-serif;
             font-weight: 300;
             overflow-y: scroll;
+            overflow-x: hidden; /* Prevent horizontal scrolling of the entire page */
         }
 
         /* Desktop Nav */
 
         .nav-container {
             background: rgba(0, 0, 0, 0.6);
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
             backdrop-filter: blur(10px);
             height: 44px;
             z-index: 300;
@@ -701,8 +707,33 @@
             object-fit: cover;
             transition: all 0.3s ease-in-out;
         }
+        .scroll-container {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+        .overflow-container {
+            width: 100%;
+            overflow-x: hidden;
+            padding: 0 20px; /* Align with other content */
+        }
 
+        .scroll-container {
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* Internet Explorer 10+ */
+        }
 
+        .scroll-container::-webkit-scrollbar {
+            display: none; /* WebKit */
+        }
+
+        .scroll-container > div {
+            scroll-snap-align: center;
+        }
     </style>
     <style scoped>
         /* Hide scrollbar for Chrome, Safari and Opera */
@@ -776,6 +807,59 @@
 
         .animate-fade-in-up {
         animation: fadeInUp 0.6s ease-out forwards;
+        }
+        .scroll-button {
+        position: relative;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: transparent;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        }
+
+        .button-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        opacity: 0.8;
+        transition: all 0.3s ease;
+        }
+
+        .button-content {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        color: white;
+        }
+
+        .scroll-button:hover .button-background {
+        opacity: 1;
+        transform: scale(1.1);
+        }
+
+        .scroll-button:hover .button-content {
+        transform: scale(0.9);
+        }
+
+        .scroll-button:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+        }
+
+        .scroll-button:active .button-background {
+        transform: scale(0.95);
+        }
+
+        .scroll-button:active .button-content {
+        transform: scale(0.85);
         }
     </style>
 </head>
@@ -1050,8 +1134,7 @@
                     </div>
                 </div>
             </section>
-
-
+            
             <!-- About Section -->
             <section id="about" class="py-20">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -1237,13 +1320,13 @@
                                     </div>
                                     <div class="flex space-x-4">
                                       <a v-if="project.demoLink" :href="project.demoLink" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 group">
-                                        <span class="mr-2">{{ currentLanguage === 'en' ? 'Live Demo' : '在线演示' }}</span>
+                                        <span class="mr-2">{{ currentLanguage === 'en' ? 'Demo' : '演示' }}</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                         </svg>
                                       </a>
                                       <a v-if="project.codeLink" :href="project.codeLink" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-600 text-base font-medium rounded-full shadow-sm text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 group">
-                                        <span class="mr-2">{{ currentLanguage === 'en' ? 'View Code' : '查看代码' }}</span>
+                                        <span class="mr-2">{{ currentLanguage === 'en' ? 'Code' : '代码' }}</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                                         </svg>
@@ -1251,65 +1334,82 @@
                                     </div>
                                   </div>
                                 </div>
-                              </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </section>            
-            <!-- Experience Section -->
-            <section id="experience" class="py-24">
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                  <h2 class="text-4xl sm:text-5xl font-extrabold text-center mb-20">
-                    <span class="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 text-transparent bg-clip-text">
-                      {{ currentLanguage === 'en' ? 'Professional Journey' : '职业历程' }}
-                    </span>
-                  </h2>
-                  <div class="relative">
-                    <!-- Timeline -->
-                    <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-400 via-purple-500 to-pink-500"></div>
-                    
-                    <!-- Scrollable container -->
-                    <div class="max-h-[800px] overflow-y-auto p-6 rounded-3xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105 transition-all duration-300 space-y-24 relative scrollbar-thin scrollbar-thumb-purple-500 scrollbar-track-gray-200 dark:scrollbar-thumb-purple-400 dark:scrollbar-track-gray-700">
-                      <div v-for="(job, index) in jobs" :key="index" 
-                           class="relative flex flex-col md:flex-row items-center"
-                           :class="{ 'md:flex-row-reverse': index % 2 !== 0 }">
-                        <!-- Timeline dot -->
-                        <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 shadow-lg flex items-center justify-center z-10">
-                          <div class="w-8 h-8 rounded-full bg-white dark:bg-gray-800 flex items-center justify-center">
-                            <span class="text-lg font-bold text-purple-600 dark:text-purple-400">{{ index + 1 }}</span>
-                          </div>
-                        </div>
-                        
-                        <!-- Job card -->
-                        <div class="ml-16 md:ml-0 md:w-5/12 bg-white dark:bg-gray-800 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden group transform hover:-translate-y-2"
-                             :class="{ 'md:mr-auto': index % 2 === 0, 'md:ml-auto': index % 2 !== 0 }">
-                          <div class="p-8 relative">
-                            <div class="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-                            <div class="relative z-10">
-                              <h3 class="text-3xl font-bold mb-3 text-gray-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
-                                {{ job.company[currentLanguage] }}
-                              </h3>
-                              <p class="text-2xl font-medium text-purple-600 dark:text-purple-400 mb-3">
-                                {{ job.role[currentLanguage] }}
-                              </p>
-                              <p class="text-lg font-medium text-gray-600 dark:text-gray-400 mb-6 inline-block px-4 py-1 bg-gray-100 dark:bg-gray-700 rounded-full">
-                                {{ job.duration }}
-                              </p>
-                              <ul class="text-gray-700 dark:text-gray-300 space-y-4">
-                                <li v-for="(responsibility, rIndex) in job.responsibilities[currentLanguage]" :key="rIndex" 
-                                    class="flex items-start group">
-                                  <svg class="w-6 h-6 text-green-500 mr-3 flex-shrink-0 mt-1 transform group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                  </svg>
-                                  <span class="group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{{ responsibility }}</span>
-                                </li>
-                              </ul>
+            </section>
+            <!--scroll image-->
+            <section id="experience" class="py-20 relative">
+                <div class="relative inset-0 overflow-hidden">
+                    <h2 class="text-4xl sm:text-5xl font-extrabold text-center mb-8">
+                        <span class="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 text-transparent bg-clip-text">
+                          {{ currentLanguage === 'en' ? 'Professional Journey' : '职业历程' }}
+                        </span>
+                    </h2>
+                    <div class="flex justify-center mb-8">
+                        <button class="group flex items-center space-x-4 px-4 py-2 text-blue-500 rounded-full transition-all duration-300 ease-in-out">
+                            <div class="p-2 rounded-full border border-blue-500 transition-all duration-300 ease-in-out">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 transform group-hover:translate-x-1 transition-all duration-300">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </div>
+                            <span class="font-semibold text-blue-500 transform hover:translate-x-1 transition-all duration-300">
+                                {{ currentLanguage === 'en' ? 'All Experiences' : '全部经历' }}
+                            </span>
+                        </button>
+                    </div>
+                    <div class="scroll-container flex overflow-x-auto py-4 w-screen" ref="scrollContainer">
+                        <div class="flex-shrink-0 w-[5vw]"></div> <!-- Spacer for left overflow -->
+                        <div v-for="(project, index) in projects" :key="index" class="flex-shrink-0 w-[80vw] sm:w-[48vw] md:w-[42vw] lg:w-[36vw] xl:w-[30vw] 2xl:w-[25vw] 3xl:w-[15vw] px-2">
+                          <div class="relative bg-white rounded-3xl overflow-hidden h-[600px] lg:h-[675px] shadow-lg group">
+                            <div class="absolute inset-0 overflow-hidden">
+                              <img 
+                                :src="project.image" 
+                                :alt="project.title[currentLanguage]" 
+                                class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
+                              >
+                              <div class="absolute inset-0 bg-black opacity-30 transition-opacity duration-300 ease-in-out group-hover:opacity-50"></div>
+                            </div>
+                            <div class="relative h-full flex flex-col justify-end p-6 text-white z-10">
+                              <h3 class="text-2xl font-bold mb-2">{{ project.title[currentLanguage] }}</h3>
+                              <p class="mb-4 overflow-y-auto max-h-[150px]">{{ project.description[currentLanguage] }}</p>
+                              <div class="flex flex-wrap gap-2 mt-auto">
+                                <span 
+                                  v-for="tech in project.technologies" 
+                                  :key="tech" 
+                                  class="px-3 py-1 bg-white/20 rounded-full text-sm font-medium backdrop-blur-sm"
+                                >
+                                  {{ tech }}
+                                </span>
+                              </div>
                             </div>
                           </div>
                         </div>
+                        <div class="flex-shrink-0 w-[5vw]"></div> <!-- Spacer for right overflow -->
+                    </div>
+                </div>
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+                    <div class="flex justify-center mt-8">
+                      <div class="flex flex-row space-x-6">
+                        <button @click="scroll('left')" class="scroll-button group">
+                          <span class="button-background"></span>
+                          <span class="button-content">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                          </span>
+                        </button>
+                        <button @click="scroll('right')" class="scroll-button group">
+                          <span class="button-background"></span>
+                          <span class="button-content">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                          </span>
+                        </button>
                       </div>
                     </div>
-                  </div>
                 </div>
             </section>
             <!--Testimonials-->
@@ -1391,7 +1491,7 @@
         <footer class="bg-white dark:bg-gray-800 py-10">
             <div class="container mx-auto px-6 text-center space-y-4">
                 <p class="text-gray-600 dark:text-gray-400 text-sm">
-                    &copy; 2023 Kiwi. {{ currentLanguage === 'en' ? 'All rights reserved.' : '保留所有权利。' }}
+                    &copy; 2024 Qi Yijiazhen. {{ currentLanguage === 'en' ? 'All rights reserved.' : '保留所有权利。' }}
                 </p>
                 <div class="flex justify-center space-x-4">
                     <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition">
@@ -1481,7 +1581,23 @@
                             en: 'Developed a real-time analytics dashboard using machine learning algorithms to predict market trends and provide actionable insights.',
                             zh: '开发了一个使用机器学习算法预测市场趋势并提供可操作洞察的实时分析仪表板。'
                         },
-                        image: './images/blue_wall.jpg',
+                        image: './background/yue-ma-7IO4-fLM574-unsplash.jpg',
+                        technologies: ['React', 'TensorFlow.js', 'Node.js', 'MongoDB'],
+                        demoLink: 'https://demo.example.com',
+                        codeLink: 'https://github.com/yourusername/project-repo',
+                        visible: false
+                        },
+                        {
+                        id: 2,
+                        title: { 
+                            en: 'AI-Powered Analytics Dashboard',
+                            zh: 'AI驱动的分析仪表板'
+                        },
+                        description: {
+                            en: 'Developed a real-time analytics dashboard using machine learning algorithms to predict market trends and provide actionable insights.',
+                            zh: '开发了一个使用机器学习算法预测市场趋势并提供可操作洞察的实时分析仪表板。'
+                        },
+                        image: './background/yue-ma--th4TTnX0y0-unsplash.jpg',
                         technologies: ['React', 'TensorFlow.js', 'Node.js', 'MongoDB'],
                         demoLink: 'https://demo.example.com',
                         codeLink: 'https://github.com/yourusername/project-repo',
@@ -1510,6 +1626,18 @@
                             }
                         }
                     ],
+                    cards: [
+                    { title: 'Card 1', content: 'Content for card 1', image: './background/yue-ma-7IO4-fLM574-unsplash.jpg' },
+                        { title: 'Card 2', content: 'Content for card 2', image: './background/yue-ma-7IO4-fLM574-unsplash.jpg' },
+                        { title: 'Card 3', content: 'Content for card 3', image: './background/yue-ma-7IO4-fLM574-unsplash.jpg' },
+                        { title: 'Card 4', content: 'Content for card 4', image: './background/yue-ma-7IO4-fLM574-unsplash.jpg' },
+                        { title: 'Card 5', content: 'Content for card 5', image: './background/yue-ma-7IO4-fLM574-unsplash.jpg' },
+                        { title: 'Card 6', content: 'Content for card 6', image: './background/yue-ma-7IO4-fLM574-unsplash.jpg' },
+                        { title: 'Card 7', content: 'Content for card 7', image: './background/yue-ma-7IO4-fLM574-unsplash.jpg' },
+                        { title: 'Card 8', content: 'Content for card 8', image: './background/yue-ma-7IO4-fLM574-unsplash.jpg' },
+                        { title: 'Card 9', content: 'Content for card 9', image: './background/yue-ma-7IO4-fLM574-unsplash.jpg' },
+                        { title: 'Card 10', content: 'Content for card 10', image: './background/yue-ma-7IO4-fLM574-unsplash.jpg' },
+                    ],
                 };
             },
             computed: {
@@ -1537,6 +1665,18 @@
                 window.removeEventListener('resize', this.updateImageAnimation)
             },
             methods: {
+                scroll(direction) {
+                    const container = this.$refs.scrollContainer;
+                    const scrollAmount = container.clientWidth * 0.8; // Approximate width of one card
+                    if (direction === 'left') {
+                        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                    } else {
+                        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                    }
+                },
+                handleScroll() {
+                    this.scrollPosition = this.$refs.scrollContainer.scrollLeft;
+                },
                 setupImageAnimation() {
                     window.addEventListener('scroll', this.updateImageAnimation)
                     window.addEventListener('resize', this.updateImageAnimation)

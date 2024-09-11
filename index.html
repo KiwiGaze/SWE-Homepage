@@ -812,8 +812,8 @@
 </head>
 
 <body class="min-h-screen font-sans text-gray-800 antialiased
-             bg-gradient-radial from-blue-50 via-white to-purple-50
-             dark:bg-gradient-radial dark:from-gray-900 dark:via-gray-800 dark:to-blue-900
+             bg-gradient-to-br from-blue-50 via-white to-blue-50
+             dark:bg-gradient-to-r dark:from-gray-700 dark:via-gray-800 dark:to-gray-700
              transition-colors duration-300">
     <div id="app" class="min-h-screen flex flex-col">
         <div class="nav-container">
@@ -945,9 +945,9 @@
         </div>
         <div class="overlay"></div>
         <main>
-            <div class="py-4 px-6 flex justify-between items-center">
+            <div class="py-4 px-6 flex justify-between items-center relative z-10">
                 <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-                    <div class="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 text-transparent bg-clip-text">
+                    <div class="text-3xl font-bold text-gra-700 dark:text-gray-300">
                         {{ currentLanguage === 'en' ? 'My Portfolio' : '个人主页' }}
                     </div>
                     <div class="flex flex-row items-center space-x-2">
@@ -974,16 +974,21 @@
                 </div>
             </div>
             <!--Home section-->
-            <section id="home" class="py-20">
-                <div class="flex flex-col items-center mx-auto px-6 text-center">
+            <section id="home" class="py-20 relative">
+                <!-- Video Background -->
+                <video autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover">
+                    <source src="path/to/your/video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="flex flex-col items-center mx-auto px-6 text-center relative z-10">
                     <!-- Profile Picture -->
                     <img src="./images/github_selfie.jpeg" alt="Professional headshot of the software engineer" class="mx-auto rounded-full mb-4 w-32 h-32 object-cover shadow-lg hover:scale-105 transition duration-300" />
 
                     <!-- Inverted Triangle Shaped Text with Gradient -->
-                    <h1 class="text-5xl font-bold mb-2 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 text-transparent bg-clip-text">
+                    <h1 class="text-5xl font-bold mb-2 text-gray-600 dark:text-white">
                         Kiwi
                     </h1>
-                    <p class="text-3xl mb-4 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 text-transparent bg-clip-text animate-pulse">
+                    <p class="text-3xl mb-4 text-gray-700 dark:text-gray-300 animate-pulse">
                         {{ currentLanguage === 'en' ? 'Software Engineer | Full Stack Developer' : '软件工程师 | 全栈开发者' }}
                     </p>
                     <!-- Text with Radiant Effect -->
@@ -993,7 +998,7 @@
                     <!-- Call to Action Buttons -->
                     <div class="flex flex-row items-center justify-center mb-8">
                         <!-- Updated Contact Me Button -->
-                        <a href="#contact" class="relative inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl hover:border-blue-400 dark:hover:border-pink-500 transition-all duration-300 transform hover:-translate-y-1 focus:ring-4 focus:ring-blue-300 dark:focus:ring-pink-300 font-medium text-lg">
+                        <a href="#contact" class="relative inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-full hover:shadow-xl hover:border-blue-400 dark:hover:border-pink-500 transition-all duration-300 transform hover:-translate-y-1 focus:ring-4 focus:ring-blue-300 dark:focus:ring-pink-300 font-medium text-lg">
                             {{ currentLanguage === 'en' ? 'Contact Me' : '联系我' }}
                         </a>                        
                         
@@ -1008,24 +1013,24 @@
 
                     <!-- Social Media Icons -->
                     <div class="flex justify-center space-x-5">
-                        <a href="#" class="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors duration-300">
-                            <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                        <a href="#" class="text-gray-600 hover:text-[#333] dark:text-gray-400 dark:hover:text-[#333] transition-all duration-300 transform hover:scale-110">
+                            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" fill="#333"/>
                             </svg>
                         </a>
-                        <a href="#" class="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors duration-300">
-                            <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        <a href="#" class="text-gray-600 hover:text-[#0A66C2] dark:text-gray-400 dark:hover:text-[#0A66C2] transition-all duration-300 transform hover:scale-110">
+                            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="#0A66C2"/>
                             </svg>
                         </a>
-                        <a href="#" class="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors duration-300">
-                            <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        <a href="#" class="text-gray-600 hover:text-[#1DA1F2] dark:text-gray-400 dark:hover:text-[#1DA1F2] transition-all duration-300 transform hover:scale-110">
+                            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" fill="#1DA1F2"/>
                             </svg>
                         </a>
-                        <a href="#" class="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors duration-300">
-                            <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/>
+                        <a href="#" class="text-gray-600 hover:text-[#E4405F] dark:text-gray-400 dark:hover:text-[#E4405F] transition-all duration-300 transform hover:scale-110">
+                            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z" fill="#E4405F"/>
                             </svg>
                         </a>
                     </div>
@@ -1041,11 +1046,11 @@
                         class="absolute w-full h-full object-cover transition-all duration-300 ease-in-out">
                     
                     <!-- Enhanced Text Overlay -->
-                    <div class="relative w-full flex flex-col items-center justify-between h-full text-white transition-all duration-300 py-28 px-8">
+                    <div class="relative w-full flex flex-col items-center justify-between h-full text-white transition-all duration-300 py-32 px-8">
                         <!-- Top content -->
                         <div class="text-center">
-                            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 px-4">
-                                <span class="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 text-transparent bg-clip-text">
+                            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-12 mb-4 px-4">
+                                <span class="text-gray-700">
                                     {{ currentLanguage === 'en' ? 'Welcome to My Portfolio' : '欢迎来到我的作品集' }}
                                 </span>
                             </h1>
@@ -1085,204 +1090,207 @@
             <!-- About Section -->
             <section id="about" class="py-20">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                  <div class="max-w-4xl mx-auto">
+                <div class="max-w-4xl mx-auto">
+            
                     <!-- Section Title -->
-                    <h2 class="text-4xl sm:text-5xl font-extrabold text-center mb-12">
-                      <span class="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 text-transparent bg-clip-text">
-                        {{ currentLanguage === 'en' ? 'About Me' : '关于我' }}
-                      </span>
+                    <h2 class="text-4xl sm:text-5xl font-extrabold text-center mb-12 text-gray-700 dark:text-gray-300">
+                    {{ currentLanguage === 'en' ? 'About Me' : '关于我' }}
                     </h2>
             
                     <!-- Main Content -->
                     <div class="space-y-12">
-                      <!-- Professional Summary -->
-                      <div class="text-center">
+            
+                    <!-- Professional Summary -->
+                    <div class="text-center">
                         <p class="text-xl text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-                          {{ currentLanguage === 'en' ? 
+                        {{ currentLanguage === 'en' ? 
                             'As a passionate software engineer with a robust background in computer science, I specialize in full-stack development, creating innovative solutions that bridge the gap between complex problems and elegant, user-centric applications.' : 
                             '作为一名热衷于计算机科学的软件工程师，我专注于全栈开发，创造创新解决方案，架起复杂问题与优雅、以用户为中心的应用程序之间的桥梁。'
-                          }}
+                        }}
                         </p>
                         <p class="text-lg text-gray-600 dark:text-gray-400">
-                          {{ currentLanguage === 'en' ? 
+                        {{ currentLanguage === 'en' ? 
                             'My approach combines technical expertise with a keen eye for user experience, ensuring that every project I undertake not only functions flawlessly but also delights its users.' : 
                             '我的方法将技术专长与敏锐的用户体验洞察力相结合，确保我承担的每个项目不仅功能完善，而且能让用户感到愉悦。'
-                          }}
+                        }}
                         </p>
-                      </div>
+                    </div>
             
-                      <!-- Key Achievements and Experience -->
-                      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Key Achievements and Experience -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
                         <!-- Achievements -->
-                        <div class="bg-blue-50 dark:bg-blue-900/30 rounded-2xl p-6 shadow-xl hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">
-                          <h3 class="text-2xl font-bold mb-4 text-blue-700 dark:text-blue-300">
+                        <div class="bg-gray-100 dark:bg-gray-800 rounded-2xl p-6 shadow-xl hover:shadow-2xl hover:shadow-gray-500/50 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">
+                        <h3 class="text-2xl font-bold mb-4 text-gray-700 dark:text-gray-300">
                             {{ currentLanguage === 'en' ? 'Key Achievements' : '主要成就' }}
-                          </h3>
-                          <ul class="space-y-3">
+                        </h3>
+                        <ul class="space-y-3">
                             <li class="flex items-start group">
-                              <svg class="w-6 h-6 text-blue-500 mr-2 flex-shrink-0 transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                              <span class="text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{{ currentLanguage === 'en' ? 'AWS Certified Solutions Architect' : 'AWS认证解决方案架构师' }}</span>
+                            <svg class="w-6 h-6 text-blue-500 dark:text-blue-300 mr-2 flex-shrink-0 transition-all duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span class="text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{{ currentLanguage === 'en' ? 'AWS Certified Solutions Architect' : 'AWS认证解决方案架构师' }}</span>
                             </li>
                             <li class="flex items-start group">
-                              <svg class="w-6 h-6 text-blue-500 mr-2 flex-shrink-0 transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M trophy 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                              <span class="text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{{ currentLanguage === 'en' ? 'Winner of ABC Hackathon 2022' : 'ABC Hackathon 2022 获奖者' }}</span>
+                            <svg class="w-6 h-6 text-blue-500 dark:text-blue-300 mr-2 flex-shrink-0 transition-all duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span class="text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{{ currentLanguage === 'en' ? 'Winner of ABC Hackathon 2022' : 'ABC Hackathon 2022 获奖者' }}</span>
                             </li>
                             <li class="flex items-start group">
-                              <svg class="w-6 h-6 text-blue-500 mr-2 flex-shrink-0 transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                              <span class="text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{{ currentLanguage === 'en' ? 'Led development of XYZ project, increasing efficiency by 40%' : '领导开发XYZ项目，提高效率40%' }}</span>
+                            <svg class="w-6 h-6 text-blue-500 dark:text-blue-300 mr-2 flex-shrink-0 transition-all duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            <span class="text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{{ currentLanguage === 'en' ? 'Led development of XYZ project, increasing efficiency by 40%' : '领导开发XYZ项目，提高效率40%' }}</span>
                             </li>
-                          </ul>
+                        </ul>
                         </div>
             
                         <!-- Experience Highlights -->
-                        <div class="bg-purple-50 dark:bg-purple-900/30 rounded-2xl p-6 shadow-xl hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">
-                          <h3 class="text-2xl font-bold mb-4 text-purple-700 dark:text-purple-300">
+                        <div class="bg-gray-100 dark:bg-gray-800 rounded-2xl p-6 shadow-xl hover:shadow-2xl hover:shadow-gray-500/50 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">
+                        <h3 class="text-2xl font-bold mb-4 text-gray-700 dark:text-gray-300">
                             {{ currentLanguage === 'en' ? 'Experience Highlights' : '经验亮点' }}
-                          </h3>
-                          <ul class="space-y-3">
+                        </h3>
+                        <ul class="space-y-3">
                             <li class="flex items-start group">
-                              <svg class="w-6 h-6 text-purple-500 mr-2 flex-shrink-0 transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                              <span class="text-gray-700 dark:text-gray-300 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300">{{ currentLanguage === 'en' ? 'Developed scalable microservices architecture' : '开发可扩展的微服务架构' }}</span>
+                            <svg class="w-6 h-6 text-blue-500 dark:text-blue-300 mr-2 flex-shrink-0 transition-all duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                            <span class="text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{{ currentLanguage === 'en' ? 'Developed scalable microservices architecture' : '开发可扩展的微服务架构' }}</span>
                             </li>
                             <li class="flex items-start group">
-                              <svg class="w-6 h-6 text-purple-500 mr-2 flex-shrink-0 transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                              <span class="text-gray-700 dark:text-gray-300 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300">{{ currentLanguage === 'en' ? 'Implemented CI/CD pipelines for rapid deployment' : '实施CI/CD管道以实现快速部署' }}</span>
+                            <svg class="w-6 h-6 text-blue-500 dark:text-blue-300 mr-2 flex-shrink-0 transition-all duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            <span class="text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{{ currentLanguage === 'en' ? 'Implemented CI/CD pipelines for rapid deployment' : '实施CI/CD管道以实现快速部署' }}</span>
                             </li>
                             <li class="flex items-start group">
-                              <svg class="w-6 h-6 text-purple-500 mr-2 flex-shrink-0 transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                              <span class="text-gray-700 dark:text-gray-300 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300">{{ currentLanguage === 'en' ? 'Optimized database performance, reducing query times by 60%' : '优化数据库性能，查询时间减少60%' }}</span>
+                            <svg class="w-6 h-6 text-blue-500 dark:text-blue-300 mr-2 flex-shrink-0 transition-all duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                            <span class="text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{{ currentLanguage === 'en' ? 'Optimized database performance, reducing query times by 60%' : '优化数据库性能，查询时间减少60%' }}</span>
                             </li>
-                          </ul>
+                        </ul>
                         </div>
-                      </div>
+                    </div>
             
-                      <!-- Education -->
-                      <div class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/30 dark:to-purple-900/30 rounded-2xl p-6 shadow-xl hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">
-                        <h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">
-                          {{ currentLanguage === 'en' ? 'Education' : '教育背景' }}
+                    <!-- Education -->
+                    <div class="bg-gray-100 dark:bg-gray-800 rounded-2xl p-6 shadow-xl hover:shadow-2xl hover:shadow-gray-500/50 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">
+                        <h3 class="text-2xl font-bold mb-4 text-gray-700 dark:text-gray-300">
+                        {{ currentLanguage === 'en' ? 'Education' : '教育背景' }}
                         </h3>
                         <div class="flex items-center justify-between flex-wrap">
-                          <div>
+                        <div>
                             <p class="text-xl font-medium text-gray-700 dark:text-gray-300">
-                              {{ currentLanguage === 'en' ? 'B.Sc. in Computer Science' : '计算机科学学士学位' }}
+                            {{ currentLanguage === 'en' ? 'B.Sc. in Computer Science' : '计算机科学学士学位' }}
                             </p>
                             <p class="text-lg text-gray-600 dark:text-gray-400">
-                              {{ currentLanguage === 'en' ? 'XYZ University' : 'XYZ大学' }}
+                            {{ currentLanguage === 'en' ? 'XYZ University' : 'XYZ大学' }}
                             </p>
-                          </div>
-                          <div class="text-right">
-                            <p class="text-lg font-medium text-gray-600 dark:text-gray-400">
-                              {{ currentLanguage === 'en' ? 'Class of 2020' : '2020届' }}
-                            </p>
-                            <p class="text-blue-600 dark:text-blue-400">
-                              {{ currentLanguage === 'en' ? 'Magna Cum Laude' : '优等毕业' }}
-                            </p>
-                          </div>
                         </div>
-                      </div>
+                        <div class="text-right">
+                            <p class="text-lg font-medium text-gray-600 dark:text-gray-400">
+                            {{ currentLanguage === 'en' ? 'Class of 2020' : '2020届' }}
+                            </p>
+                            <p class="text-gray-600 dark:text-gray-400">
+                            {{ currentLanguage === 'en' ? 'Magna Cum Laude' : '优等毕业' }}
+                            </p>
+                        </div>
+                        </div>
+                    </div>
+            
                     </div>
             
                     <!-- Call to Action -->
                     <div class="mt-12 text-center">
-                      <a href="#contact" class="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    <a href="#contact" class="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                         {{ currentLanguage === 'en' ? 'Let\'s Collaborate' : '让我们合作' }}
-                      </a>
+                    </a>
                     </div>
-                  </div>
+                </div>
                 </div>
             </section>
+  
             <!-- Skills Section -->
-            <section id="skills" class="py-20 dark:from-gray-800 dark:to-gray-900 overflow-hidden">
+            <section id="skills" class="py-20 overflow-hidden">
                 <h2 class="text-4xl sm:text-5xl font-extrabold text-center mb-12 px-4">
-                  <span class="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 text-transparent bg-clip-text">
+                <span class="text-gray-700 dark:text-gray-300 ">
                     {{ currentLanguage === 'en' ? 'Skills' : '技能' }}
-                  </span>
+                </span>
                 </h2>
                 <div 
-                  ref="carouselRef"
-                  @mouseenter="pauseScroll"
-                  @mouseleave="resumeScroll"
-                  class="relative w-full overflow-hidden"
+                ref="carouselRef"
+                @mouseenter="pauseScroll"
+                @mouseleave="resumeScroll"
+                class="relative w-full overflow-hidden"
                 >
-                  <div 
+                <div 
                     class="flex transition-transform duration-1000 ease-linear"
                     :style="{ transform: `translateX(${-scrollPosition}px)` }"
-                  >
+                >
                     <div 
-                      v-for="(skill, index) in duplicatedSkills" 
-                      :key="`${skill.name}-${index}`"
-                      class="flex-shrink-0 pb-10 w-40 mx-2"
+                    v-for="(skill, index) in duplicatedSkills" 
+                    :key="`${skill.name}-${index}`"
+                    class="flex-shrink-0 pb-10 w-48 mx-3"
                     >
-                      <div class="bg-white dark:bg-gray-800 rounded-xl p-6 hover:shadow-xl transition duration-300 transform hover:-translate-y-1 text-center relative overflow-hidden group my-4">
-                        <div class="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                        <i :class="[skill.icon, 'text-4xl mb-3', skill.color]"></i>
-                        <p class="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{{ skill.name }}</p>
-                      </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 text-center relative overflow-hidden group my-4 border border-gray-200 dark:border-gray-700">
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                        <div class="relative z-10">
+                        <div class="mb-4 bg-gray-100 dark:bg-gray-700 rounded-full p-4 inline-block">
+                            <i :class="[skill.icon, 'text-5xl', skill.color]"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{{ skill.name }}</h3>
+                        <div class="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+                        </div>
                     </div>
-                  </div>
+                    </div>
+                </div>
                 </div>
             </section>
             <!-- Projects Section -->
-            <section id="projects" class="py-20">
+            <section id="projects" class="py-20 ">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 class="text-4xl sm:text-5xl font-extrabold text-center mb-8">
-                        <span class="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 text-transparent bg-clip-text">
+                    <h2 class="text-4xl sm:text-5xl font-extrabold text-center mb-12">
+                        <span class="text-gray-700 dark:text-gray-300">
                             {{ currentLanguage === 'en' ? 'Featured Projects' : '精选项目' }}
                         </span>
                     </h2>
-                    <div class="flex justify-center mb-8">
-                        <button class="group flex items-center space-x-4 px-4 py-2 text-blue-500 rounded-full transition-all duration-300 ease-in-out">
-                            <div class="p-2 rounded-full border border-blue-500 transition-all duration-300 ease-in-out">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 transform group-hover:translate-x-1 transition-all duration-300">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                </svg>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div v-for="(project, index) in projects" :key="project.id" 
+                            class="group relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 transform hover:-translate-y-2"
+                            :class="{'opacity-0': !project.visible}" 
+                            :ref="el => { if (el) projectRefs[index] = el }">
+                            <div class="relative h-64 md:h-80">
+                                <img :src="project.image" :alt="project.title[currentLanguage]" 
+                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
-                            <span class="font-semibold text-blue-500 transform hover:translate-x-1 transition-all duration-300">
-                                {{ currentLanguage === 'en' ? 'All Projects' : '全部项目' }}
-                            </span>
-                        </button>
-                    </div>
-                    <!--description-->
-                    <div class="space-y-16">
-                        <div v-for="(project, index) in projects" :key="project.id" class="project-card bg-white dark:bg-gray-800 rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2" :class="{'opacity-0': !project.visible}" :ref="el => { if (el) projectRefs[index] = el }">
-                            <div class="project-card bg-white dark:bg-gray-800 rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2" :class="{'opacity-0': !project.visible}" :ref="el => { if (el) projectRefs[index] = el }">
-                                <div class="flex flex-col lg:flex-row">
-                                  <div class="lg:w-1/2 overflow-hidden relative group">
-                                    <img :src="project.image" :alt="project.title" class="w-full h-64 lg:h-full object-cover object-center transform transition-transform duration-300 group-hover:scale-105">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                                  </div>
-                                  <div class="lg:w-1/2 p-8 flex flex-col justify-between bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-800 dark:to-gray-700">
-                                    <div>
-                                      <h3 class="text-3xl font-bold text-gray-800 dark:text-white mb-4 tracking-tight">
-                                        {{ project.title[currentLanguage] }}
-                                      </h3>
-                                      <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                                        {{ project.description[currentLanguage] }}
-                                      </p>
-                                      <div class="flex flex-wrap gap-2 mb-6">
-                                        <span v-for="tech in project.technologies" :key="tech" class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium transition-colors duration-200 hover:bg-blue-200 dark:hover:bg-blue-800">
-                                          {{ tech }}
-                                        </span>
-                                      </div>
-                                    </div>
-                                    <div class="flex space-x-4">
-                                      <a v-if="project.demoLink" :href="project.demoLink" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 group">
-                                        <span class="mr-2">{{ currentLanguage === 'en' ? 'Demo' : '演示' }}</span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            <div class="absolute inset-0 flex flex-col justify-end p-6 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                <h3 class="text-2xl font-bold mb-2">{{ project.title[currentLanguage] }}</h3>
+                                <p class="text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+                                    {{ project.description[currentLanguage] }}
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span v-for="tech in project.technologies" :key="tech" 
+                                        class="px-2 py-1 bg-white/20 rounded-full text-xs font-medium backdrop-blur-sm">
+                                        {{ tech }}
+                                    </span>
+                                </div>
+                                <div class="flex space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200">
+                                    <a v-if="project.demoLink" :href="project.demoLink" target="_blank" rel="noopener noreferrer" 
+                                    class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                         </svg>
-                                      </a>
-                                      <a v-if="project.codeLink" :href="project.codeLink" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-600 text-base font-medium rounded-full shadow-sm text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 group">
-                                        <span class="mr-2">{{ currentLanguage === 'en' ? 'Code' : '代码' }}</span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                                    </a>
+                                    <a v-if="project.codeLink" :href="project.codeLink" target="_blank" rel="noopener noreferrer" 
+                                    class="flex items-center justify-center w-12 h-12 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors duration-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                                         </svg>
-                                      </a>
-                                    </div>
-                                  </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    
+                    <div class="mt-12 text-center">
+                        <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 transform hover:-translate-y-1">
+                            <span class="mr-2">{{ currentLanguage === 'en' ? 'View All Projects' : '查看所有项目' }}</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </section>
@@ -1290,11 +1298,11 @@
             <section id="experience" class="py-20 relative">
                 <div class="relative inset-0 overflow-hidden">
                     <h2 class="text-4xl sm:text-5xl font-extrabold text-center mb-8">
-                        <span class="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 text-transparent bg-clip-text">
+                        <span class="text-gray-700 dark:text-gray-300">
                           {{ currentLanguage === 'en' ? 'Professional Journey' : '职业历程' }}
                         </span>
                     </h2>
-                    <div class="flex justify-center mb-8">
+                    <div class="flex justify-center">
                         <button class="group flex items-center space-x-4 px-4 py-2 text-blue-500 rounded-full transition-all duration-300 ease-in-out">
                             <div class="p-2 rounded-full border border-blue-500 transition-all duration-300 ease-in-out">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 transform group-hover:translate-x-1 transition-all duration-300">
@@ -1357,7 +1365,7 @@
             <section id="testimonials" class="py-24">
                 <div class="container mx-auto px-6">
                   <h2 class="text-5xl font-extrabold mb-16 text-center animate-fade-in-up">
-                    <span class="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 text-transparent bg-clip-text">
+                    <span class="text-gray-700 dark:text-gray-300">
                       {{ currentLanguage === 'en' ? 'Testimonials' : '推荐语' }}
                     </span>
                   </h2>
@@ -1365,7 +1373,7 @@
                     <div v-for="(testimonial, index) in testimonials" :key="index"
                          class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2 animate-fade-in-up">
                       <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center mr-4">
+                        <div class="w-16 h-16 rounded-full bg-gray-300 flex items-center justify-center mr-4">
                           <span class="text-2xl font-bold text-white">{{ testimonial.name[currentLanguage][0] }}</span>
                         </div>
                         <div>
@@ -1392,7 +1400,7 @@
             <!--Contact Section-->
             <section id="contact" class="container mx-auto px-6 py-20">
                 <h2 class="text-5xl font-extrabold mb-16 text-center animate-fade-in-up">
-                    <span class="bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 text-transparent bg-clip-text">
+                    <span class="text-gray-700 dark;text-gray-300">
                     {{ currentLanguage === 'en' ? 'Get in Touch' : '联系我' }}
                     </span>
                 </h2>
@@ -1419,7 +1427,7 @@
                             <textarea id="message" name="message" rows="5" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-purple-500 transition" required></textarea>
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                            <button type="submit" class="px-8 py-3 rounded-full bg-gradient-to-br from-blue-600 to-purple-500 text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
                                 {{ currentLanguage === 'en' ? 'Send Message' : '发送留言' }}
                             </button>
                         </div>
@@ -1448,7 +1456,7 @@
             </div>
         </footer>
         
-        <button @click="scrollToTop" class="back-to-top bg-gradient-to-r from-blue-500 to-purple-600 text-white p-2 rounded-full transition" :class="{'visible': showBackToTop}">
+        <button @click="scrollToTop" class="back-to-top bg-black hover:bg-gray-500 text-white p-2 rounded-full transition" :class="{'visible': showBackToTop}">
             <i class="fas fa-arrow-up"></i>
         </button>
     </div>
